@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Edit</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        input[type=text],
+        input[type=number],
+        input[type=datetime],
+        select {
+            width: 90%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        label {
+            padding: 12px 12px 12px 0;
+            display: inline-block
+        }
+
+        button {
+            background-color: blue;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            margin: 6px 4px;
+        }
+
+        .col-25 {
+            float: left;
+            width: 25%;
+            margin-top: 6px;
+        }
+
+        .col-75 {
+            float: left;
+            width: 75%;
+            margin-top: 6px;
+        }
+
+        .row::before {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Edit Data</h1>
+
+    <form action="" method="post">
+        <div class="row">
+            <div class="col-25">
+                <label for="id"> ID</label>
+            </div>
+            <div class="col-75">
+                <input type="text" id="id" name="id" value="<%= item.id %>" disabled>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-25">
+                <label for="string"> String</label>
+            </div>
+            <div class="col-75">
+                <input type="text" id="string" name="string" value="<%= item.st %>">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-25">
+                <label for="Integer"> Integer</label>
+            </div>
+            <div class="col-75">
+                <input type="number" id="integer" name="integer" value="<%= item.it %>">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-25">
+                <label for="float"> Float</label>
+            </div>
+            <div class="col-75">
+                <input type="text" id="float" name="float" value="<%= item.ft%>">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-25">
+                <label for="date"> Date</label>
+            </div>
+            <div class="col-75">
+                <input type="datetime" id="date" name="date" value="<%= item.dt%>">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-25">
+                <label for="boolean"> Boolean</label>
+            </div>rows
+            <div class="col-75">
+                <select id="boolean" name="boolean">
+                    <option value="true" <%= item.bn == 'true' ? 'selected' : ''%>>true</option>
+                    <option value="false" <%= item.bn == 'false' ? 'selected' : ''%>>false</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <button type="submit">Update</button>
+    </form>
+
+</body>
+
+</html>

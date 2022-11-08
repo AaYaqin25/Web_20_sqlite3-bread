@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        .edit {
+            background-color: green;
+        }
+
+        .delete {
+            background-color: red;
+        }
+
+        .search {
+            background-color: blue;
+        }
+
+        .pagination {
+            display: inline-block;
+        }
+
+        .pagination a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            border: 1px solid #ddd;
+        }
+
+        .pagination a:hover:not(.active) {
+            background-color: #ddd;
+        }
+
+        .pagination a:first-child {
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+
+        .pagination a:last-child {
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        input[type=text],
+        input[type=number],
+        select {
+            width: 90%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        input[type=datetime] {
+            width: 30%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        input[type=submit] {
+            background-color: blue;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            margin: 6px 4px;
+        }
+
+        label {
+            padding: 12px 12px 12px 0;
+            display: inline-block
+        }
+
+        button {
+            background-color: blue;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            margin: 6px 4px;
+        }
+
+        .col-25 {
+            float: left;
+            width: 25%;
+            margin-top: 6px;
+        }
+
+        .col-75 {
+            float: left;
+            width: 75%;
+            margin-top: 6px;
+        }
+
+        .row::before {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1>BREAD(Browse, Read, Edit, Add, Delete)</h1>
+        <h2>Filters</h2>
+    </div>
+    <div>
+        <form action="" method="get">
+            <div class="row">
+                <div class="col-25">
+                    <input type="checkbox" id="idch" name="idch">
+                    <label for="id"> ID </label>
+                </div>
+                <div class="col-75">
+                    <input type="number" name="id" id="id" placeholder="id">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-25">
+                    <input type="checkbox" id="stringch" name="stringch">
+                    <label for="string"> string</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" name="string" id="string" placeholder="string">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-25">
+                    <input type="checkbox" id="integerch" name="integerch">
+                    <label for="integer"> Integer</label>
+                </div>
+                <div class="col-75">
+                    <input type="number" name="integer" id="integer" placeholder="integer">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-25">
+                    <input type="checkbox" id="floatch" name="floatch">
+                    <label for="float"> Float</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" name="float" id="float" placeholder="float">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-25">
+                    <input type="checkbox" id="datech" name="datech">
+                    <label for="date"> Date</label>
+                </div>
+                <div class="col-75">
+                    <input type="datetime" name="date" id="date" placeholder="start date">
+                    <br>
+                    <span>to</span>
+                    <br>
+                    <input type="datetime" name="date" id="date" placeholder="end date">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-25">
+                    <input type="checkbox" id="booleanch" name="booleanch">
+                    <label for="boolean"> Boolean</label>
+                </div>
+                <div class="col-75">
+                    <select name="boolean" id="boolean">
+                        <option value="" selected disabled hidden>Choose the boolean</option>
+                        <option value=true>True</option>
+                        <option value=false>False</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <p><button class="search" type="submit"><strong>Search</strong></button></p>
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>String</th>
+                    <th>Integer</th>
+                    <th>Float</th>
+                    <th>Date</th>
+                    <th>Boolean</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% data.forEach((item, index)=>{ %>
+                    <tr>
+                        <td>
+                            <%= index + offset +1%>
+                        </td>
+                        <td>
+                            <%= item.st%>
+                        </td>
+                        <td>
+                            <%= item.it%>
+                        </td>
+                        <td>
+                            <%= item.ft%>
+                        </td>
+                        <td>
+                            <%= item.dt%>
+                        </td>
+                        <td>
+                            <%= item.bn%>
+                        </td>
+                        <td>
+                            <Button class="edit" type="button"><a
+                                    href="/edit/<%= item.id %>"><strong>Edit</strong></a></Button>
+                            <button class="delete" type="button"><a
+                                    href="/delete/<%= item.id %>"><strong>Delete</strong></a></button>
+                        </td>
+                    </tr>
+                    <% })%>
+            </tbody>
+        </table>
+        <div class="pagination">
+            <p>
+                <% for (let i=1; i <=totalPage; i++) { %>
+                    <a href="/?page=<%= i%>">
+                        <%= i%>
+                    </a>
+                    <% } %>
+            </p>
+        </div>
+    </div>
+
+    <div>
+        <form method="get" action="/add">
+            <input type="submit" value="Add" />
+        </form>
+    </div>
+</body>
+
+</html>
