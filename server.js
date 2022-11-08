@@ -1,4 +1,4 @@
-import express  from 'express';
+import express from 'express';
 import bodyParser from 'body-parser';
 import AllFun from './Models/query.js';
 import sqlite3 from 'sqlite3';
@@ -17,12 +17,13 @@ app.use(bodyParser.json())
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-    const page = parseInt(req.query.page) || 1
-    AllFun.read(page, (data, offset, totalPage) => {
-      res.render("index", { data, offset, page, totalPage})
-    })
-
+  const { id, string, integer, float, date, boolean } = req.query;
+  const page = parseInt(req.query.page) || 1
+  AllFun.read(page, id, string, integer, float, date, boolean, (data, offset, totalPage) => {
+    res.render("index", { data, offset, page, totalPage, id, string, integer, float, date, boolean })
   })
+
+})
 
 app.get('/add', (req, res) => {
   res.render("add");
@@ -57,12 +58,12 @@ app.post("/edit/:id", (req, res) => {
   })
 })
 
-app.get('/', (req, res) => {
-  const {id, string, integer, float, date, boolean} = req.query;
-  AllFun.search(id, string, integer, float, date, boolean, (value) => {
-    res.render('index', {data: value})
-  })
-})
+// app.get('/', (req, res) => {
+
+//   AllFun.search(id, string, integer, float, date, boolean, (value) => {
+//     res.render('index', {data: value})
+//   })
+// })
 
 app.listen(port, () => {
   console.log(`Aplikasi berjalan di port ${port}`);
