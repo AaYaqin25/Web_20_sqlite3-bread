@@ -54,10 +54,10 @@ export default class AllFun {
         })
     }
 
-    static searchId(id, callback) {
-        db.all("SELECT * FROM gabungan WHERE gabungan.id = ?", [id], (err, rows) => {
-            if (err) return console.log("gagal", err);
-            callback(rows);
-        })
+    static search(id, str, int, flt , dte, bon, callback) { 
+       db.all("SELECT * FROM gabungan WHERE gabungan.id = ?, AND gabungan.st = ?, AND gabungan.it = ?, AND gabungan.ft = ?, AND gabungan.dt = ?, AND gabungan.bn = ?", [id,str,int,flt,dte,bon], (err, rows) => {
+        if (err) return console.log("gagal", err);
+        callback(rows);
+       })
     }
 }
