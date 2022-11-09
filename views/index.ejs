@@ -134,65 +134,65 @@
         <form action="" method="get">
             <div class="row">
                 <div class="col-25">
-                    <input type="checkbox" id="idch" name="idch">
+                    <input type="checkbox" id="idch" name="idch" <%= query.idch ? 'checked' : ''%>>
                     <label for="id"> ID </label>
                 </div>
                 <div class="col-75">
-                    <input type="number" name="id" id="id" placeholder="id" <%= data.id%>>
+                    <input type="number" name="id" id="id" placeholder="id" <%= query.id%>>
                 </div>
             </div>
             <br>
             <div class="row">
                 <div class="col-25">
-                    <input type="checkbox" id="stringch" name="stringch">
+                    <input type="checkbox" id="stringch" name="stringch" <%= query.stringch ? 'checked' : ''%>>
                     <label for="string"> string</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" name="string" id="string" placeholder="string" <%= data.st%>>
+                    <input type="text" name="string" id="string" placeholder="string" <%= query.string%>>
                 </div>
             </div>
             <br>
             <div class="row">
                 <div class="col-25">
-                    <input type="checkbox" id="integerch" name="integerch">
+                    <input type="checkbox" id="integerch" name="integerch" <%= query.integerch ? 'checked' : ''%>>
                     <label for="integer"> Integer</label>
                 </div>
                 <div class="col-75">
-                    <input type="number" name="integer" id="integer" placeholder="integer" <%= data.it%>>
+                    <input type="number" name="integer" id="integer" placeholder="integer" <%= query.integer%>>
                 </div>
             </div>
             <br>
             <div class="row">
                 <div class="col-25">
-                    <input type="checkbox" id="floatch" name="floatch">
+                    <input type="checkbox" id="floatch" name="floatch" <%= query.floatch ? 'checked' : ''%>>
                     <label for="float"> Float</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" name="float" id="float" placeholder="float" <%= data.ft%>>
+                    <input type="text" name="float" id="float" placeholder="float" <%= query.float%>>
                 </div>
             </div>
             <br>
             <div class="row">
                 <div class="col-25">
-                    <input type="checkbox" id="datech" name="datech">
+                    <input type="checkbox" id="datech" name="datech" <%= query.datech ? 'checked' : ''%>>
                     <label for="date"> Date</label>
                 </div>
                 <div class="col-75">
-                    <input type="datetime" name="date" id="date" placeholder="start date" <%= data.dt%>>
+                    <input type="datetime" name="startdate" id="startdate" placeholder="start date" <%= query.startdate%>>
                     <br>
                     <span>to</span>
                     <br>
-                    <input type="datetime" name="date" id="date" placeholder="end date" <%= data.dt%>>
+                    <input type="datetime" name="enddate" id="enddate" placeholder="end date" <%= query.enddate%>>
                 </div>
             </div>
             <br>
             <div class="row">
                 <div class="col-25">
-                    <input type="checkbox" id="booleanch" name="booleanch">
+                    <input type="checkbox" id="booleanch" name="booleanch" <%= query.boolean ? 'checked' : ''%>>
                     <label for="boolean"> Boolean</label>
                 </div>
                 <div class="col-75">
-                    <select name="boolean" id="boolean" <%= data.bn%>>
+                    <select name="boolean" id="boolean" <%= query.boolean%>>
                         <option value="" selected disabled hidden>Choose the boolean</option>
                         <option value=true>True</option>
                         <option value=false>False</option>

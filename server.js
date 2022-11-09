@@ -17,10 +17,10 @@ app.use(bodyParser.json())
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-  const { id, string, integer, float, date, boolean } = req.query;
+  const key = req.query
   const page = parseInt(req.query.page) || 1
-  AllFun.read(page, id, string, integer, float, date, boolean, (data, offset, totalPage) => {
-    res.render("index", { data, offset, page, totalPage, id, string, integer, float, date, boolean })
+  AllFun.read(page, key, ({result, value, offset, totalPage, sql}) => {
+    res.render("index", { result, data: value, offset, page, totalPage, query: sql})
   })
 
 })
@@ -57,13 +57,6 @@ app.post("/edit/:id", (req, res) => {
     res.redirect('/');
   })
 })
-
-// app.get('/', (req, res) => {
-
-//   AllFun.search(id, string, integer, float, date, boolean, (value) => {
-//     res.render('index', {data: value})
-//   })
-// })
 
 app.listen(port, () => {
   console.log(`Aplikasi berjalan di port ${port}`);
