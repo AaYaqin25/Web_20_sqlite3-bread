@@ -6,7 +6,7 @@ import path from 'path';
 
 const pathDB = path.join(path.resolve(), 'db', 'alltype.db');
 const db = new sqlite3.Database(pathDB);
-const port = 3000
+const port = 3001
 
 const app = express()
 
@@ -17,10 +17,11 @@ app.use(bodyParser.json())
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
+  const link = req.url
   const key = req.query
   const page = parseInt(req.query.page) || 1
-  AllFun.read(page, key, ( data, offset, totalPage) => {
-    res.render("index", { data, offset, page, totalPage, query: key})
+  AllFun.read(page, key, link, ( data, offset, totalPage, url) => {
+    res.render("index", { data, offset, page, totalPage, query: key, url})
   })
 
 })

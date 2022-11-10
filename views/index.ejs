@@ -132,9 +132,10 @@
     </div>
     <div>
         <form action="" method="get">
+            <input type="hidden" name="page" value="1">
             <div class="row">
                 <div class="col-25">
-                    <input type="checkbox" id="idch" name="idch" <%= query.idch ? 'checked' : ''%>>
+                    <input type="checkbox" id="idch" name="idch" <%=query.idch ? 'checked' : '' %>>
                     <label for="id"> ID </label>
                 </div>
                 <div class="col-75">
@@ -144,7 +145,7 @@
             <br>
             <div class="row">
                 <div class="col-25">
-                    <input type="checkbox" id="stringch" name="stringch" <%= query.stringch ? 'checked' : ''%>>
+                    <input type="checkbox" id="stringch" name="stringch" <%=query.stringch ? 'checked' : '' %>>
                     <label for="string"> string</label>
                 </div>
                 <div class="col-75">
@@ -154,7 +155,7 @@
             <br>
             <div class="row">
                 <div class="col-25">
-                    <input type="checkbox" id="integerch" name="integerch" <%= query.integerch ? 'checked' : ''%>>
+                    <input type="checkbox" id="integerch" name="integerch" <%=query.integerch ? 'checked' : '' %>>
                     <label for="integer"> Integer</label>
                 </div>
                 <div class="col-75">
@@ -164,7 +165,7 @@
             <br>
             <div class="row">
                 <div class="col-25">
-                    <input type="checkbox" id="floatch" name="floatch" <%= query.floatch ? 'checked' : ''%>>
+                    <input type="checkbox" id="floatch" name="floatch" <%=query.floatch ? 'checked' : '' %>>
                     <label for="float"> Float</label>
                 </div>
                 <div class="col-75">
@@ -174,11 +175,12 @@
             <br>
             <div class="row">
                 <div class="col-25">
-                    <input type="checkbox" id="datech" name="datech" <%= query.datech ? 'checked' : ''%>>
+                    <input type="checkbox" id="datech" name="datech" <%=query.datech ? 'checked' : '' %>>
                     <label for="date"> Date</label>
                 </div>
                 <div class="col-75">
-                    <input type="date" name="startdate" id="startdate" placeholder="start date" value="<%= query.startdate%>">
+                    <input type="date" name="startdate" id="startdate" placeholder="start date"
+                        value="<%= query.startdate%>">
                     <br>
                     <span>to</span>
                     <br>
@@ -188,7 +190,7 @@
             <br>
             <div class="row">
                 <div class="col-25">
-                    <input type="checkbox" id="booleanch" name="booleanch" <%= query.boolean ? 'checked' : ''%>>
+                    <input type="checkbox" id="booleanch" name="booleanch" <%=query.boolean ? 'checked' : '' %>>
                     <label for="boolean"> Boolean</label>
                 </div>
                 <div class="col-75">
@@ -248,17 +250,16 @@
         </table>
         <div class="pagination">
             <p>
-                <%if (page !=1) {%>
-                    <a href="<%= `/?page=${(page - 1)}`%>">Previous</a>
-                    <%}%>
-                        <% for (let i=1; i <=totalPage; i++) { %>
-                            <a href="/?page=<%= i%>">
-                                <%= i %>
-                            </a>
-                            <% } %>
-                                <%if (page < totalPage) {%>
-                                    <a href="<%= `/?page=${(page + 1)}`%>">Next</a>
-                                    <%}%>
+                <a href="<%= url.replace(`page=${page}`, `page=${page - 1}`)%>">Previous</a>
+
+                <% for (let i=1; i <=totalPage; i++) { %>
+                    <a href="<%= url.replace(`page=${page}`, `page=${i}`)%>">
+                        <%= i %>
+                    </a>
+                    <% } %>
+
+                        <a href="<%= url.replace(`page=${page}`, `page=${page + 1}`)%>">Next</a>
+
             </p>
         </div>
     </div>

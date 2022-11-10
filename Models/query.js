@@ -5,9 +5,9 @@ const pathDB = path.join(path.resolve(), 'db', 'alltype.db');
 const db = new sqlite3.Database(pathDB);
 
 export default class AllFun {
-    static read(page, key, callback) {
+    static read(page, key, link,callback) {
         let array = []
-        
+        const url = link == '/' ? '/?page = 1' : link
 
         if (key.idch == 'on' && key.id != '') {
             array.push(`id = ${key.id}`)
@@ -34,7 +34,7 @@ export default class AllFun {
         }
 
         let sql = "SELECT COUNT(*) AS total FROM gabungan"
-        if (array.length != 0) {
+        if (array.length > 0) {
             sql += ` WHERE ${array.join(' AND ')}`
         }
 
@@ -48,19 +48,18 @@ export default class AllFun {
             const totalPage = Math.ceil(total / limit)
 
             sql = "SELECT * FROM gabungan"
-            if (array.length != 0) {
+            if (array.length > 0) {
                 sql += ` WHERE ${array.join(' AND ')}`
             }
-            else {
                 sql += ` LIMIT ${limit} OFFSET ${offset}`
-            }
             
             db.all(sql, (err, rows) => {
                 if (err) return console.log("gagal", err);
                 callback(
                     rows,
                     offset,
-                    totalPage
+                    totalPage,
+                    url
                 )
 
             })
