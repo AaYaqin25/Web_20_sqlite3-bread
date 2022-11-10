@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { query } from 'express';
 import bodyParser from 'body-parser';
 import AllFun from './Models/query.js';
 import sqlite3 from 'sqlite3';
@@ -19,8 +19,8 @@ app.set('view engine', 'ejs');
 app.get('/', (req, res) => {
   const key = req.query
   const page = parseInt(req.query.page) || 1
-  AllFun.read(page, key, ({result, value, offset, totalPage, sql}) => {
-    res.render("index", { result, data: value, offset, page, totalPage, query: sql})
+  AllFun.read(page, key, ( data, offset, totalPage) => {
+    res.render("index", { data, offset, page, totalPage, query: key})
   })
 
 })
