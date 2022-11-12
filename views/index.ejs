@@ -253,7 +253,7 @@
                 <a href="<%= url.replace(`page=${page}`, `page=${page - 1}`)%>">Previous</a>
 
                 <% for (let i=1; i <=totalPage; i++) { %>
-                    <a href="<%= url.replace(`page=${page}`, `page=${i}`)%>">
+                    <a href="/?page=<%= i%>">
                         <%= i %>
                     </a>
                     <% } %>

@@ -6,7 +6,7 @@ import path from 'path';
 
 const pathDB = path.join(path.resolve(), 'db', 'alltype.db');
 const db = new sqlite3.Database(pathDB);
-const port = 3001
+const port = 3000
 
 const app = express()
 
