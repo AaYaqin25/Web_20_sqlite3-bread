@@ -139,7 +139,7 @@
             <input type="hidden" name="page" value="1">
             <div class="row">
                 <div class="col-25">
-                    <input type="checkbox" id="idch" name="idch" <%=query.idch ? 'checked' : '' %>>
+                    <input type="checkbox" id="idch" name="idch" >
                     <label for="id"> ID </label>
                 </div>
                 <div class="col-75">
@@ -149,7 +149,7 @@
             <br>
             <div class="row">
                 <div class="col-25">
-                    <input type="checkbox" id="stringch" name="stringch" <%=query.stringch ? 'checked' : '' %>>
+                    <input type="checkbox" id="stringch" name="stringch">
                     <label for="string"> string</label>
                 </div>
                 <div class="col-75">
@@ -159,7 +159,7 @@
             <br>
             <div class="row">
                 <div class="col-25">
-                    <input type="checkbox" id="integerch" name="integerch" <%=query.integerch ? 'checked' : '' %>>
+                    <input type="checkbox" id="integerch" name="integerch">
                     <label for="integer"> Integer</label>
                 </div>
                 <div class="col-75">
@@ -169,7 +169,7 @@
             <br>
             <div class="row">
                 <div class="col-25">
-                    <input type="checkbox" id="floatch" name="floatch" <%=query.floatch ? 'checked' : '' %>>
+                    <input type="checkbox" id="floatch" name="floatch">
                     <label for="float"> Float</label>
                 </div>
                 <div class="col-75">
@@ -179,12 +179,11 @@
             <br>
             <div class="row">
                 <div class="col-25">
-                    <input type="checkbox" id="datech" name="datech" <%=query.datech ? 'checked' : '' %>>
+                    <input type="checkbox" id="datech" name="datech">
                     <label for="date"> Date</label>
                 </div>
                 <div class="col-75">
-                    <input type="date" name="startdate" id="startdate" placeholder="start date"
-                        value="<%= query.startdate%>">
+                    <input type="date" name="startdate" id="startdate" placeholder="start date" value="<%= query.startdate%>">
                     <br>
                     <span>to</span>
                     <br>
@@ -194,7 +193,7 @@
             <br>
             <div class="row">
                 <div class="col-25">
-                    <input type="checkbox" id="booleanch" name="booleanch" <%=query.boolean ? 'checked' : '' %>>
+                    <input type="checkbox" id="booleanch" name="booleanch">
                     <label for="boolean"> Boolean</label>
                 </div>
                 <div class="col-75">
@@ -239,7 +238,7 @@
                             <%= item.ft%>
                         </td>
                         <td>
-                            <%= item.dt%>
+                            <%= item.dt ? moment(item.dt).format('DD MMMM YYYY') : 'kosong'%>
                         </td>
                         <td>
                             <%= item.bn%>
@@ -248,7 +247,7 @@
                             <Button class="edit" type="button"><a
                                     href="/edit/<%= item.id %>"><strong>Edit</strong></a></Button>
                             <button class="delete" type="button"><a
-                                    href="/delete/<%= item.id %>"><strong>Delete</strong></a></button>
+                                    href="/delete/<%= item.id %>" onclick="return confirm('Are you sure you want to delete this item?');"><strong>Delete</strong></a></button>
                         </td>
                     </tr>
                     <% })%>
@@ -256,16 +255,18 @@
         </table>
         <div class="pagination">
             <p>
+                <% if (page != 1) {%>
                 <a href="<%= url.replace(`page=${page}`, `page=${page - 1}`)%>">Previous</a>
+                <%}%>
 
                 <% for (let i=1; i <=totalPage; i++) { %>
                     <a href="<%= url.replace(`page=${page}`, `page=${i}`)%>">
                         <%= i %>
                     </a>
                     <% } %>
-
+                        <% if (page != totalPage) {%>
                         <a href="<%= url.replace(`page=${page}`, `page=${page + 1}`)%>">Next</a>
-
+                        <% }%>
             </p>
         </div>
     </div>

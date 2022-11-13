@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import AllFun from './Models/query.js';
 import sqlite3 from 'sqlite3';
 import path from 'path';
+import moment from 'moment';
 
 const pathDB = path.join(path.resolve(), 'db', 'alltype.db');
 const db = new sqlite3.Database(pathDB);
@@ -21,7 +22,7 @@ app.get('/', (req, res) => {
   const key = req.query
   const page = parseInt(req.query.page) || 1
   AllFun.read(page, key, link, ( data, offset, totalPage, url) => {
-    res.render("index", { data, offset, page, totalPage, query: key, url})
+    res.render("index", { data, offset, page, totalPage, query: key, url, moment})
   })
 
 })
@@ -47,7 +48,7 @@ app.get("/delete/:id", (req, res) => {
 app.get("/edit/:id", (req, res) => {
   const id = req.params.id;
   AllFun.showUpdate(id, (value) => {
-    res.render('edit', { item: value })
+    res.render('edit', { item: value, moment})
   })
 })
 

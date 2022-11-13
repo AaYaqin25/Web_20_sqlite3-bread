@@ -44,7 +44,6 @@ export default class AllFun {
         let sql = "SELECT COUNT(*) AS total FROM gabungan"
         if (array.length > 0) {
             sql += ` WHERE ${array.join(' AND ')}`
-            console.log(sql);
         }
         
         const limit = 3
