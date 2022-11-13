@@ -7,41 +7,50 @@ const db = new sqlite3.Database(pathDB);
 export default class AllFun {
     static read(page, key, link,callback) {
         let array = []
-        const url = link == '/' ? '/?page = 1' : link
+        let values = []
+        const url = link == '/' ? '/?page=1' : link
 
         if (key.idch == 'on' && key.id != '') {
-            array.push(`id = ${key.id}`)
+            array.push('id = ?')
+            values.push(`${key.id}`)
         }
 
         if (key.stringch == 'on' && key.string != '') {
-            array.push(`st LIKE '%${key.string}%'`)
+            array.push("st LIKE '%' || ? || '%' ")
+            values.push(`${key.string}`)
         }
 
         if (key.integerch == 'on' && key.integer != '') {
-            array.push(`it = ${key.integer}`)
+            array.push(`it = ?`)
+            values.push(`${key.integer}`)
         }
 
         if (key.floatch == `on` && key.float != '') {
-            array.push(`ft = ${key.float}`)
+            array.push(`ft = ?`)
+            values.push(`${key.float}`)
         }
 
         if (key.datech == 'on' && key.startdate != '' && key.enddate != '') {
-            array.push(`dt BETWEEN '${key.startdate}' AND '${key.enddate}'`)
+            array.push(`dt BETWEEN ? AND ?`)
+            values.push(`${key.startdate}`)
+            values.push(`${key.enddate}`)
         }
 
         if (key.booleanch == 'on' && key.boolean != '') {
-            array.push(`bn = '${key.boolean}'`)
+            array.push(`bn = ?`)
+            values.push(`${key.boolean}`)
         }
 
         let sql = "SELECT COUNT(*) AS total FROM gabungan"
         if (array.length > 0) {
             sql += ` WHERE ${array.join(' AND ')}`
+            console.log(sql);
         }
-
+        
         const limit = 3
         const offset = (page - 1) * limit
 
-        db.all(sql, (err, rows) => {
+        db.all(sql, values, (err, rows) => {
             if (err) return console.log("gagal", err);
 
             const total = rows[0].total
@@ -51,9 +60,9 @@ export default class AllFun {
             if (array.length > 0) {
                 sql += ` WHERE ${array.join(' AND ')}`
             }
-                sql += ` LIMIT ${limit} OFFSET ${offset}`
-            
-            db.all(sql, (err, rows) => {
+                sql += ` LIMIT ? OFFSET ?`
+
+            db.all(sql, [...values, limit, offset], (err, rows) => {
                 if (err) return console.log("gagal", err);
                 callback(
                     rows,

@@ -31,9 +31,13 @@
         .delete {
             background-color: red;
         }
-
-        .search {
-            background-color: blue;
+        
+        .reset {
+            background-color:darkorange;
+            border: none;
+            color: white;
+            padding: 9px 14px;
+            margin: 6px 4px;
         }
 
         .pagination {
@@ -202,7 +206,9 @@
                 </div>
             </div>
             <br>
-            <p><button class="search" type="submit"><strong>Search</strong></button></p>
+            <button class="search" type="submit"><strong>Search</strong></button>
+            <a href='/' class="reset"><strong>Reset</strong></a>
+            <hr>
         </form>
 
         <table>
@@ -253,7 +259,7 @@
                 <a href="<%= url.replace(`page=${page}`, `page=${page - 1}`)%>">Previous</a>
 
                 <% for (let i=1; i <=totalPage; i++) { %>
-                    <a href="/?page=<%= i%>">
+                    <a href="<%= url.replace(`page=${page}`, `page=${i}`)%>">
                         <%= i %>
                     </a>
                     <% } %>
@@ -266,7 +272,7 @@
 
     <div>
         <form method="get" action="/add">
-            <input type="submit" value="Add" />
+            <input type="submit" value="Add"/>
         </form>
     </div>
 </body>
